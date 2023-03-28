@@ -72,15 +72,15 @@
 }
 
 :root {
-  --main: #1f2448;
+  --main: #373a3c;
   --main-transparent: #1f244800;
   --main-shade: #1f24480a;
   --main-shadow: #1f244820;
   --shadow: #1f244835;
-  --background: #ebf0f7;
+  --background: #ffffff;
   --background-light: #ffffff;
   --primary-accent: #0088ff;
-  --secondary-accent: #aaeeff;
+  --secondary-accent: #ebe9e1;
   --bootstrap-padding: 15px;
 }
 
@@ -353,7 +353,7 @@ a:hover {
 }
 
 .number-plays {
-  font-size: 3em;
+  font-size: 2em;
   line-height: 1em;
 }
 

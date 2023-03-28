@@ -8,13 +8,13 @@ const fn = (val) => Number(Number.parseFloat(val)).toLocaleString('en');
 
 const CorpusCard = ({name, title, acronym, metrics}) => {
   const prefix = acronym
-    ? acronym.replace('DraCor', '')
+    ? acronym.replace('Golem', '')
     : name.charAt(0).toUpperCase() + name.slice(1);
   return (
     <div className="corpus-card" xl={4} lg={6} md={6} sm={12} xs={12}>
       <Link to={`/${name}`}>
         <h2>
-          <span>{prefix}</span>DraCor
+          <span>{prefix}</span>Golem
         </h2>
       </Link>
       <h3>
@@ -23,16 +23,16 @@ const CorpusCard = ({name, title, acronym, metrics}) => {
       <table>
         <tbody>
           <tr>
-            <th className="number-plays">{fn(metrics.plays)}</th>
-            <td>Number of plays</td>
+            <th className="number-plays">{fn(metrics.stories)}</th>
+            <td>Number of stories</td>
           </tr>
           <tr>
             <th>
               {fn(metrics.characters)}
               <br />
               <span>
-                {metrics.male + metrics.female > 0
-                  ? ` (M: ${metrics.male}, F: ${metrics.female})`
+                {metrics.male + metrics.female + metrics.other > 0
+                  ? ` (M: ${metrics.male}, F: ${metrics.female}, O:${metrics.other})`
                   : ''}
               </span>
             </th>
@@ -52,22 +52,11 @@ const CorpusCard = ({name, title, acronym, metrics}) => {
           </tr>
           <tr>
             <th>
-              {fn(metrics.sp)} <br />
-              <span>({fn(metrics.wordcount.sp)})</span>
+              {fn(metrics.comments)} <br />
+              <span>({fn(metrics.wordcount.comments)})</span>
             </th>
             <td>
-              <code>sp</code>
-              <br />
-              (Tokens)
-            </td>
-          </tr>
-          <tr>
-            <th>
-              {fn(metrics.stage)} <br />
-              <span>({fn(metrics.wordcount.stage)})</span>
-            </th>
-            <td>
-              <code>stage</code>
+              <code>comments</code>
               <br />
               (Tokens)
             </td>
