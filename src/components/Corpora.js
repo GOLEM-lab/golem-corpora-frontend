@@ -7,11 +7,11 @@ import '../slick-theme.css';
 import '../slick-theme.scss';
 
 function byNumOfPlays(a, b) {
-  if (a.metrics.plays > b.metrics.plays) {
+  if (a.metrics.documents > b.metrics.documents) {
     return 1;
   }
 
-  if (a.metrics.plays < b.metrics.plays) {
+  if (a.metrics.documents < b.metrics.documents) {
     return -1;
   }
 

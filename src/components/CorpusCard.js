@@ -14,7 +14,7 @@ const CorpusCard = ({name, title, acronym, metrics}) => {
     <div className="corpus-card" xl={4} lg={6} md={6} sm={12} xs={12}>
       <Link to={`/${name}`}>
         <h2>
-          <span>{prefix}</span>Golem
+          <span>{prefix}</span>corpus
         </h2>
       </Link>
       <h3>
@@ -23,42 +23,47 @@ const CorpusCard = ({name, title, acronym, metrics}) => {
       <table>
         <tbody>
           <tr>
-            <th className="number-plays">{fn(metrics.stories)}</th>
-            <td>Number of stories</td>
+            <th className="number-plays">{fn(metrics.documents)}</th>
+            <td>number of documents</td>
           </tr>
           <tr>
             <th>
               {fn(metrics.characters)}
               <br />
               <span>
-                {metrics.male + metrics.female + metrics.other > 0
-                  ? ` (M: ${metrics.male}, F: ${metrics.female}, O:${metrics.other})`
+                {metrics.male + metrics.female + metrics.nonbinary > 0
+                  ? ` (M: ${metrics.male}, F: ${metrics.female}, N:${metrics.nonbinary})`
                   : ''}
               </span>
             </th>
             <td>
               <code>person</code> + <code>personGrp</code>
               <br />
-              Number of characters
+              number of characters
             </td>
           </tr>
           <tr>
-            <th>{fn(metrics.wordcount.text)}</th>
+            <th>
+              {fn(metrics.chapters)} <br />
+              <span>{fn(metrics.paragraphs)} </span> <br />
+              <span>{fn(metrics.wordcount.words_in_documents)} </span>
+            </th>
             <td>
-              <code>text</code>
-              <br />
-              Text tokens
+              <code>documents</code> <br />
+              chapters <br />
+              paragraphs <br />
+              words in documents
             </td>
           </tr>
           <tr>
             <th>
               {fn(metrics.comments)} <br />
-              <span>({fn(metrics.wordcount.comments)})</span>
+              <span>{fn(metrics.wordcount.words_in_comments)}</span>
             </th>
             <td>
               <code>comments</code>
               <br />
-              (Tokens)
+              words in comments
             </td>
           </tr>
           <tr>

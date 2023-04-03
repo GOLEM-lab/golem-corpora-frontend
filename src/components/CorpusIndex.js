@@ -125,7 +125,7 @@ function formatSource(d, corpusId) {
 }
 
 const CorpusIndex = ({data}) => {
-  if (!data || !data.dramas) {
+  if (!data || !data.documents) {
     return null;
   }
 
@@ -149,7 +149,7 @@ const CorpusIndex = ({data}) => {
     },
     {
       dataField: 'title',
-      text: 'Title',
+      text: 'Character',
       sort: true,
       filterValue: (cell, row) =>
         `${row.title} ${row.subtitle} ${row.wikidataId}`,
@@ -213,7 +213,7 @@ const CorpusIndex = ({data}) => {
       <ToolkitProvider
         search
         keyField="name"
-        data={data.dramas}
+        data={data.documents}
         columns={columns}
       >
         {(props) => (
