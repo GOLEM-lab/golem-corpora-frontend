@@ -19,7 +19,8 @@ const Corpus = ({match, location}) => {
   const [corpus, setCorpus] = useState(null);
   const [loading, setLoading] = useState(false);
   const {corpora} = useContext(DracorContext);
-  const validCorpus = corpora.filter((c) => c.name === corpusId).length === 1;
+  const validCorpus =
+    corpora.filter((c) => c.corpusName === corpusId).length === 1;
 
   useEffect(() => {
     async function fetchCorpus() {
@@ -27,10 +28,10 @@ const Corpus = ({match, location}) => {
       setLoading(true);
       try {
         const response = await api.get(`/corpora/${corpusId}`);
-        response.data.documents.forEach((d) => {
-          d.networkSize = Number.parseInt(d.networkSize, 10) || 0;
+        response.data.characters.forEach((d) => {
+          d.networkSize = Number.parseInt(d.numAppearances, 10) || 0;
           if (d.authors) {
-            d.authorNames = d.authors.map((a) => a.name).join(' · ');
+            d.authorNames = d.authors.map((a) => a.authorName).join(' · ');
           } else {
             d.authors = [];
             d.authorNames = 'Anonymous';
@@ -65,7 +66,7 @@ const Corpus = ({match, location}) => {
     return (
       <Container fluid>
         <div className="dracor-page">
-          <Header>{corpus.title}</Header>
+          <Header>{corpus.corpusTitle}</Header>
           <CorpusIndex data={corpus} />
           <Footer />
         </div>

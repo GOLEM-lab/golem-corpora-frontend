@@ -6,28 +6,28 @@ import style from './CorpusLabel.module.scss';
 
 const cx = classnames.bind(style);
 
-const CorpusLabel = ({name, title, acronym}) => {
+const CorpusLabel = ({corpusName, corpusTitle, acronym}) => {
   const prefix = acronym
-    ? acronym.replace('DraCor', '')
-    : name.charAt(0).toUpperCase() + name.slice(1);
+    ? acronym.replace('Golem', '')
+    : corpusName.charAt(0).toUpperCase() + corpusName.slice(1);
 
   return (
     <span className={cx('main')}>
-      <Link to={`/${name}`} title={title || 'Corpus'}>
-        <em>{prefix}</em>DraCor
+      <Link to={`/${corpusName}`} title={corpusTitle || 'Corpus'}>
+        <em>{prefix}</em>corpus
       </Link>
     </span>
   );
 };
 
 CorpusLabel.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  corpusName: PropTypes.string.isRequired,
+  corpusTitle: PropTypes.string,
   acronym: PropTypes.string,
 };
 
 CorpusLabel.defaultProps = {
-  title: null,
+  corpusTitle: null,
   acronym: null,
 };
 

@@ -6,19 +6,19 @@ import {Link} from 'react-router-dom';
 // 8.248968E6), which is why we need to use parseFloat.
 const fn = (val) => Number(Number.parseFloat(val)).toLocaleString('en');
 
-const CorpusCard = ({name, title, acronym, metrics}) => {
+const CorpusCard = ({corpusName, corpusTitle, acronym, metrics}) => {
   const prefix = acronym
     ? acronym.replace('Golem', '')
-    : name.charAt(0).toUpperCase() + name.slice(1);
+    : corpusName.charAt(0).toUpperCase() + corpusName.slice(1);
   return (
     <div className="corpus-card" xl={4} lg={6} md={6} sm={12} xs={12}>
-      <Link to={`/${name}`}>
+      <Link to={`/${corpusName}`}>
         <h2>
           <span>{prefix}</span>corpus
         </h2>
       </Link>
       <h3>
-        <Link to={`/${name}`}>{title}</Link>
+        <Link to={`/${corpusName}`}>{corpusTitle}</Link>
       </h3>
       <table>
         <tbody>

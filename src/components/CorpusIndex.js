@@ -49,8 +49,8 @@ function formatAuthor(authorNames, d) {
 function formatTitle(d, corpusId) {
   return (
     <span>
-      <Link className="drama-title" to={`/${corpusId}/${d.name}`}>
-        {d.title}
+      <Link className="drama-title" to={`/${corpusId}/${d.characterName}`}>
+        {d.characterName}
       </Link>
       {d.subtitle ? (
         <small>
@@ -71,14 +71,10 @@ function formatTitle(d, corpusId) {
 function formatYear(d) {
   return (
     <span className="year">
-      {formatEra(d.yearNormalized, 1000)}
+      {formatEra(d.createdYear, 1000)}
       <br />
       <span className="year-details">
-        <Years
-          written={d.writtenYear}
-          premiere={d.premiereYear}
-          print={d.printYear}
-        />
+        <Years created={d.createdYear} first_fanfiction={d.firstFanficYear} />
       </span>
     </span>
   );
@@ -101,7 +97,7 @@ function formatYearHeader(column, colIndex, {sortElement}) {
 }
 
 function formatSource(d, corpusId) {
-  const teiUrl = `${apiUrl}/corpora/${corpusId}/play/${d.name}/tei`;
+  const csvUrl_character = `${apiUrl}/corpora/${corpusId}/character/${d.entryName}/csv`;
   return (
     <span>
       {d.sourceUrl ? (
@@ -114,18 +110,18 @@ function formatSource(d, corpusId) {
       <br />
       <a
         className="download-button"
-        href={teiUrl}
+        href={csvUrl_character}
         target="_blank"
         rel="noreferrer noopener"
       >
-        TEI version
+        download CSV
       </a>
     </span>
   );
 }
 
 const CorpusIndex = ({data}) => {
-  if (!data || !data.documents) {
+  if (!data || !data.characters) {
     return null;
   }
 
@@ -148,16 +144,16 @@ const CorpusIndex = ({data}) => {
       formatter: formatAuthor,
     },
     {
-      dataField: 'title',
+      dataField: 'characterName',
       text: 'Character',
       sort: true,
       filterValue: (cell, row) =>
-        `${row.title} ${row.subtitle} ${row.wikidataId}`,
-      formatter: (cell, row) => formatTitle(row, data.name),
+        `${row.characterName} ${row.subtitle} ${row.wikidataId}`,
+      formatter: (cell, row) => formatTitle(row, data.corpusName),
     },
     {
-      dataField: 'yearNormalized',
-      text: 'Year (normalized)',
+      dataField: 'createdYear',
+      text: 'Year',
       sort: true,
       sortFunc: (a, b, order) => {
         if (a === '') {
@@ -171,22 +167,21 @@ const CorpusIndex = ({data}) => {
         return order === 'asc' ? a - b : b - a;
       },
       filterValue: (cell, row) =>
-        `${row.yearNormalized} ${row.writtenYear} ` +
-        `${row.premiereYear} ${row.printYear}`,
+        `${row.createdYear} + ${row.firstFanficYear} `,
       formatter: (cell, row) => formatYear(row),
       headerFormatter: formatYearHeader,
     },
     {
-      dataField: 'networkSize',
-      text: 'Network Size',
+      dataField: 'numAppearances',
+      text: 'Number of appearances',
       formatter: (cell) => Number.parseInt(cell, 10) || 0,
       sort: true,
     },
     {
       dataField: 'source',
-      text: 'Source',
+      text: 'Info',
       sort: true,
-      formatter: (cell, row) => formatSource(row, data.name),
+      formatter: (cell, row) => formatSource(row, data.corpusName),
     },
     {
       dataField: 'id',
@@ -197,32 +192,32 @@ const CorpusIndex = ({data}) => {
 
   const defaultSorted = [
     {
-      dataField: 'yearNormalized',
-      order: 'asc',
+      dataField: 'numAppearances',
+      order: 'desc',
     },
   ];
 
-  const jsonUrl = `${apiUrl}/corpora/${data.name}/metadata`;
-  const csvUrl = `${apiUrl}/corpora/${data.name}/metadata/csv`;
+  const jsonUrl = `${apiUrl}/corpora/${data.corpusName}/metadata`;
+  const csvUrl = `${apiUrl}/corpora/${data.corpusName}/metadata/csv`;
 
   return (
     <div>
       <Helmet titleTemplate="%s - DraCor">
-        <title>{data.title}</title>
+        <title>{data.corpusTitle}</title>
       </Helmet>
       <ToolkitProvider
         search
-        keyField="name"
-        data={data.documents}
+        keyField="corpusName"
+        data={data.characters}
         columns={columns}
       >
         {(props) => (
           <div>
             <div className="corpus-description">
-              {(data.description || data.license) && (
+              {(data.corpusDescription || data.license) && (
                 <div>
-                  {data.description && (
-                    <ReactMarkdown>{data.description}</ReactMarkdown>
+                  {data.corpusDescription && (
+                    <ReactMarkdown>{data.corpusDescription}</ReactMarkdown>
                   )}
                   {data.licence && (
                     <p>
@@ -244,7 +239,7 @@ const CorpusIndex = ({data}) => {
                       href={jsonUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      download={`${data.name}dracor-metadata.json`}
+                      download={`${data.corpusName}golem-metadata.json`}
                     >
                       JSON
                     </a>{' '}
@@ -253,7 +248,7 @@ const CorpusIndex = ({data}) => {
                       href={csvUrl}
                       target="_blank"
                       rel="noreferrer noopener"
-                      download={`${data.name}dracor-metadata.csv`}
+                      download={`${data.corpusName}golem-metadata.csv`}
                     >
                       CSV
                     </a>

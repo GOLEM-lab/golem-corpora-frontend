@@ -53,32 +53,23 @@ export function formatYear(yearString) {
   return yearString;
 }
 
-const Years = ({written, premiere, print}) => {
+const Years = ({created, first_fanfic}) => {
   return (
     <>
-      {written && (
+      {created && (
         <>
-          <span title="written">
+          <span title="created">
             <FontAwesomeIcon icon="pen-fancy" size="sm" />
             &nbsp;
-            {formatYear(written)}
+            {formatYear(created)}
           </span>{' '}
         </>
       )}
-      {premiere && (
-        <>
-          <span title="premiered">
-            <FontAwesomeIcon icon="theater-masks" size="sm" />
-            &nbsp;
-            {formatYear(premiere)}
-          </span>{' '}
-        </>
-      )}
-      {print && (
-        <span title="printed">
+      {first_fanfic && (
+        <span title="first_fanfic">
           <FontAwesomeIcon icon="book" size="sm" />
           &nbsp;
-          {formatYear(print)}
+          {formatYear(first_fanfic)}
         </span>
       )}
     </>
@@ -86,15 +77,13 @@ const Years = ({written, premiere, print}) => {
 };
 
 Years.propTypes = {
-  written: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  premiere: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  print: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  created: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  first_fanfic: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Years.defaultProps = {
-  written: null,
-  premiere: null,
-  print: null,
+  created: null,
+  first_fanfic: null,
 };
 
 export default Years;

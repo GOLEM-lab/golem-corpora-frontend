@@ -103,9 +103,9 @@ const Corpora = () => {
         .reverse()
         .map((corpus) => (
           <CorpusCard
-            key={`card-${corpus.name}`}
-            name={corpus.name}
-            title={corpus.title}
+            key={`card-${corpus.corpusName}`}
+            corpusName={corpus.corpusName}
+            corpusTitle={corpus.corpusTitle}
             metrics={corpus.metrics}
             acronym={corpus.acronym}
           />
