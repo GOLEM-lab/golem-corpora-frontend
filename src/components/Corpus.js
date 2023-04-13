@@ -29,7 +29,7 @@ const Corpus = ({match, location}) => {
       try {
         const response = await api.get(`/corpora/${corpusId}`);
         response.data.characters.forEach((d) => {
-          d.networkSize = Number.parseInt(d.numAppearances, 10) || 0;
+          d.networkSize = Number.parseInt(d.numDocuments, 10) || 0;
           if (d.authors) {
             d.authorNames = d.authors.map((a) => a.authorName).join(' · ');
           } else {

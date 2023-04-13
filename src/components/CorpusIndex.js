@@ -172,8 +172,8 @@ const CorpusIndex = ({data}) => {
       headerFormatter: formatYearHeader,
     },
     {
-      dataField: 'numAppearances',
-      text: 'Number of appearances',
+      dataField: 'numDocuments',
+      text: 'Number of documents',
       formatter: (cell) => Number.parseInt(cell, 10) || 0,
       sort: true,
     },
@@ -192,7 +192,7 @@ const CorpusIndex = ({data}) => {
 
   const defaultSorted = [
     {
-      dataField: 'numAppearances',
+      dataField: 'numDocuments',
       order: 'desc',
     },
   ];
