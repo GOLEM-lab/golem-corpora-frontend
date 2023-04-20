@@ -20,7 +20,7 @@ const Corpus = ({match, location}) => {
   const [loading, setLoading] = useState(false);
   const {corpora} = useContext(DracorContext);
   const validCorpus =
-    corpora.filter((c) => c.corpusName === corpusId).length === 1;
+    corpora.filter((c) => c.displayId === corpusId).length === 1;
 
   useEffect(() => {
     async function fetchCorpus() {
@@ -66,7 +66,7 @@ const Corpus = ({match, location}) => {
     return (
       <Container fluid>
         <div className="dracor-page">
-          <Header>{corpus.corpusTitle}</Header>
+          <Header>{corpus.corpusName}</Header>
           <CorpusIndex data={corpus} />
           <Footer />
         </div>

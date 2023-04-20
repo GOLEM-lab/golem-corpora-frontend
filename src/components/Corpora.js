@@ -103,11 +103,11 @@ const Corpora = () => {
         .reverse()
         .map((corpus) => (
           <CorpusCard
-            key={`card-${corpus.corpusName}`}
-            corpusName={corpus.corpusName}
-            corpusTitle={corpus.corpusTitle}
-            metrics={corpus.metrics}
-            acronym={corpus.acronym}
+            key={`card-${corpus.id}`}
+            displayId={corpus.id}
+            displayName={corpus.corpusName}
+            displayMetrics={corpus.metrics}
+            displayAcronym={corpus.acronym}
           />
         ))}
     </Slider>
