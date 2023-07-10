@@ -1,6 +1,9 @@
-# Frontend for dracor.org
+# Frontend for data.golemlab.eu (not available yet)
 
-The web app running the [dracor.org](https://dracor.org) website.
+Based on the web app running the [dracor.org](https://dracor.org) website.
+
+This is how it looks like:
+![GOLEM web frontend](GOLEM_dracor_mock_frontend.png)
 
 ## Development
 
