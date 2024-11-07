@@ -1,4 +1,8 @@
-# Frontend for data.golemlab.eu (not available yet)
+![maintenance-status](https://img.shields.io/badge/maintenance-deprecated-red.svg)
+
+Has been replaced by http://search.golemlab.eu:3006
+
+# Inital idea for the web frontend
 
 Based on the web app running the [dracor.org](https://dracor.org) website.
 
